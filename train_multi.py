@@ -18,8 +18,7 @@ nlp_logger.warning("Shape of training set ({}, {}, {})".format(training_set[0].s
 
 # Prepare net
 biblio_eater = BiblioEater()
+
 # all sentences are padded to same length
-
-
 biblio_eater.design_multi_sentence_net(training_set[0].shape[1], training_set[0].shape[2])
 biblio_eater.train_multi_sentence_net(training_set, writer_labels)

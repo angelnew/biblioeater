@@ -15,6 +15,8 @@ from the_logger import nlp_logger
 
 class BiblioEater:
 
+    # Class to design, train and validate two topologies of NN
+
     DROPOUT_PROB = 0.2
     DROPOUT_PROB_OUT = 0.3
     NUM_WRITERS = 2
@@ -39,6 +41,7 @@ class BiblioEater:
     
     def design_sequential_net(self, max_tokens_per_paragraph, pos_vector_length):
 
+        # This is the sequential model featured in the article
         self.max_tokens_per_paragraph = max_tokens_per_paragraph
         self.pos_vector_length = pos_vector_length
 
@@ -73,6 +76,9 @@ class BiblioEater:
 
     def train_sequential_net(self, pos_training_set, writer_labels):
 
+        # Sequential model training
+        # fit_generator not really needed as the dataset is small. It works all the same.
+
         # We train with the whole set. We will validate with other books
         model_steps = round(len(pos_training_set) / self.BATCH_SIZE)
 
@@ -82,14 +88,17 @@ class BiblioEater:
             steps_per_epoch=model_steps, verbose=2
         )
 
-        # serialize
+        # serialize to disk
         with open(MODEL_FILE, "wb") as outfile:
             pickle.dump(self.model, outfile)
 
         nlp_logger.info("Sequential model written to file")
 
     def design_multi_sentence_net(self, max_tokens_per_sentence, pos_vector_length):
-        # The Functional API is required for non sequential networks
+
+        # Alternative design. Although more complex, it does not yield better results consistently
+
+        # Keras Functional API is required for non sequential networks
         sentence_input_1 = Input(shape=(max_tokens_per_sentence, pos_vector_length,), name='sentence_input_1')
         sentence_input_2 = Input(shape=(max_tokens_per_sentence, pos_vector_length,), name='sentence_input_2')
         sentence_input_3 = Input(shape=(max_tokens_per_sentence, pos_vector_length,), name='sentence_input_3')
@@ -126,18 +135,21 @@ class BiblioEater:
 
     def train_multi_sentence_net(self, pos_training_set, writer_labels):
 
+        # Non-sequential model training
+        # fit_generator not used this time
+
         self.model.fit(pos_training_set,
                        writer_labels,
                        batch_size=self.BATCH_SIZE,
                        epochs=self.NUM_EPOCHS, verbose=2)
 
-        # serialize
+        # serialize to disk
         with open(MULTI_MODEL_FILE, "wb") as outfile:
             pickle.dump(self.model, outfile)
 
     def generate_training_batch(self, training_set, labels, batch_size):
 
-        # generator function avoid memory problems with big training sets
+        # generator function avoid memory problems with big training sets - not adding much value in this case
 
         batch_features = np.zeros((batch_size, self.max_tokens_per_paragraph, self.pos_vector_length))
         batch_labels = np.zeros((batch_size, self.NUM_WRITERS))
@@ -156,6 +168,3 @@ class BiblioEater:
             yield batch_features, batch_labels
 
 
-if __name__ == "__main__":
-    biblio_eater = BiblioEater()
-    biblio_eater.design_multi_sentence_net(290, 17)

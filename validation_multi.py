@@ -51,7 +51,7 @@ tom_accuracy = sum([probs[0] > 0.5 for probs in tom_predictions]) / len(tom_pred
 
 nlp_logger.warning("Accuracy for Twain/tom: {:.4f}".format(tom_accuracy))
 
-# Now we have to prepare Usher for validation
+# Now we have to prepare Erureka for validation
 eureka_set = eureka.get_base_training_set()
 eureka_validation = Book.one_writer_multi_set(eureka_set, sentences_per_sample=3,
                                                 samples_per_writer=-1, max_sentences_length=208)

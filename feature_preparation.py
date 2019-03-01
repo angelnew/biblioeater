@@ -6,23 +6,18 @@ import numpy as np
 from constants import *
 from the_logger import nlp_logger
 
-from frequency_plotter import FrequencyPlotter
 from book import Book
 
 pym = Book("Arthur Gordon Pym")
 tom = Book("Tom Sawyer")
 
+# read the parsed texts
 pym.from_file(PYM_FILE)
 tom.from_file(TOM_FILE)
 
 # replace word with POS in sentences
 pym.encode_as_pos()
 tom.encode_as_pos()
-
-# How many Other POS found
-other_in_pym = sum([pos == "X" for pos_list in pym.pos_sentences for pos in pos_list])
-other_in_tom = sum([pos == "X" for pos_list in tom.pos_sentences for pos in pos_list])
-nlp_logger.info("Found {} Other POS in Pym and {} more in Tom".format(other_in_pym, other_in_tom))
 
 # Now we have to prepare the data for training
 pym_base_set = pym.get_base_training_set()

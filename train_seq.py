@@ -24,7 +24,7 @@ nlp_logger.warning("Shape of training set ({}, {})".format(training_set[0].shape
 # Prepare net
 biblio_eater = BiblioEater()
 
-# all sentences are padded to same length
+# all sentences are padded to same length, althoug Keras has a padding option that we are not using
 biblio_eater.design_sequential_net(training_set[0].shape[0], training_set[0].shape[1])
 biblio_eater.train_sequential_net(training_set, writer_labels)
 

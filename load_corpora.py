@@ -11,7 +11,6 @@ nlp_logger.warning("Process starts")
 
 pym = Book("Arthur Gordon Pym")
 tom = Book("Tom Sawyer")
-usher = Book("House of Usher")
 eureka = Book("Eureka")
 huck = Book("Huckleberry Finn")
 
