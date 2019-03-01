@@ -11,20 +11,17 @@ import numpy as np
 # Load the books
 pym = Book("Arthur Gordon Pym")
 tom = Book("Tom Sawyer")
-usher = Book("House of Usher")
 eureka = Book("Eureka")
 huck = Book("Huckleberry Finn")
 
 pym.from_file(PYM_FILE)
 tom.from_file(TOM_FILE)
-usher.from_file(USHER_FILE)
 eureka.from_file(EUREKA_FILE)
 huck.from_file(HUCK_FILE)
 
 # replace word with POS in sentences
 pym.encode_as_pos()
 tom.encode_as_pos()
-usher.encode_as_pos()
 eureka.encode_as_pos()
 huck.encode_as_pos()
 
@@ -53,17 +50,6 @@ tom_predictions = sequential_model.predict(tom_validation)
 tom_accuracy = sum([probs[0] > 0.5 for probs in tom_predictions]) / len(tom_predictions)
 
 nlp_logger.warning("Accuracy for Twain/tom: {:.4f}".format(tom_accuracy))
-
-# Now we have to prepare Usher for validation
-usher_set = usher.get_base_training_set()
-usher_validation = Book.one_writer_multi_set(usher_set, sentences_per_sample=3,
-                                                samples_per_writer=-1, max_sentences_length=208)
-
-# apply the model to Usher
-usher_predictions = sequential_model.predict(usher_validation)
-poe_accuracy = sum([probs[0] < 0.5 for probs in usher_predictions]) / len(usher_predictions)
-
-nlp_logger.warning("Accuracy for Poe/Usher: {:.4f}".format(poe_accuracy))
 
 # Now we have to prepare Usher for validation
 eureka_set = eureka.get_base_training_set()

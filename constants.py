@@ -1,25 +1,26 @@
-CORPORA_FOLDER = "/home/angel/stanfordnlp_resources/corpora"
+# Customise this folder to the place where the raw text sits
+CORPORA_FOLDER = "../../corpora"
 OUT_FOLDER = "out"
-PYM_FILE = "out/pym.pkl"
-TOM_FILE = "out/tom.pkl"
-HUCK_FILE = "out/huck.pkl"
-USHER_FILE = "out/usher.pkl"
-EUREKA_FILE = "out/eureka.pkl"
+PYM_FILE = "pym.pkl"
+TOM_FILE = "tom.pkl"
+HUCK_FILE = "huck.pkl"
+USHER_FILE = "usher.pkl"
+EUREKA_FILE = "eureka.pkl"
 LENGTH_CHART_FILE = "length.png"
 UPOS_CHART_FILE = "upos.png"
 
-PYM_SAMPLE_FILE = "out/pym_sample.pkl"
-TOM_SAMPLE_FILE = "out/tom_sample.pkl"
+PYM_SAMPLE_FILE = "pym_sample.pkl"
+TOM_SAMPLE_FILE = "tom_sample.pkl"
 
-TRAINING_SET_FILE = "out/training_set.pkl"
-TRAINING_SET_FILE_4_MULTI = "out/training_multi.pkl"
-TRAINING_TEXTS_FILE = "out/training_texts.pkl"
-LABELS_FILE = "out/labels.pkl"
-LABELS_FILE_4_MULTI = "out/multi_labels.pkl"
+TRAINING_SET_FILE = "training_set.pkl"
+TRAINING_SET_FILE_4_MULTI = "training_multi.pkl"
+TRAINING_TEXTS_FILE = "training_texts.pkl"
+LABELS_FILE = "labels.pkl"
+LABELS_FILE_4_MULTI = "multi_labels.pkl"
 
-MODEL_FILE = "out/sequential.pkl"
-MULTI_MODEL_FILE = "out/multi_model.pkl"
-OLD_MODEL_FILE = "out/old_sequential.pkl"
+MODEL_FILE = "sequential.pkl"
+MULTI_MODEL_FILE = "multi_model.pkl"
+OLD_MODEL_FILE = "old_sequential.pkl"
 
 upos_dict = {
 "ADJ": "adjective",
