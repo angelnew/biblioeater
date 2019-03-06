@@ -1,7 +1,7 @@
 # BiblioEater
 
 This is a didactic project to illustrate a technique to assign literary texts to its
-original authors. Edgar Allan Poe and Mark Twain were selected for this exercise.
+original authors. Edgar Allan Poe and Mark Twain were selected for this exercise. Read the original [article](https://towardsdatascience.com/mark-twain-once-wrote-or-was-it-poe-47268538ecab).
 
 ## Installation
 
